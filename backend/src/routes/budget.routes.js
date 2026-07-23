@@ -3,6 +3,9 @@ import {createBudget, deleteBudget, getBudget, updateBudget} from "../controller
 
 const router = express.Router();
 
+//middleware auth
+//router.use(protect);
+
 router.get("/", getBudget);
 router.post("/", createBudget);
 router.put("/:id", updateBudget);
