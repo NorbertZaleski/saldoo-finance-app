@@ -19,5 +19,4 @@ app.listen(PORT, () => {
 });
 
 //ogarnac modele/kontrollery
-//teraz robie budget.controller i user
-//user controller jest git, poprwaic budget
+//teraz robie category
