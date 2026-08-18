@@ -48,7 +48,7 @@ export const createBudget = async(req,res) => {
     }
 };
 
-export const updateBudget = async(req,res) =>  {
+export const updateBudget = async(req,res) => {
     try {
         const {categories, limit, alertTreshold} = req.body;
         updatedBudget = await Budget.findByIdAndUpdate(
