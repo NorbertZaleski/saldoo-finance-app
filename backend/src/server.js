@@ -16,6 +16,7 @@ app.use("/", routes);
 
 app.listen(PORT, () => {
     console.log("Server started on ", PORT);
+    console.log('🔑 JWT_SECRET exists:', !!process.env.JWT_SECRET);
 });
 
 //ogarnac modele/kontrollery

@@ -5,7 +5,7 @@ import { protect } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 //middleware auth
-router.use(protect);
+//router.use(protect);
 
 router.get("/:id", getBudget);
 router.post("/", createBudget);

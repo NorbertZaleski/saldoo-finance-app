@@ -14,7 +14,7 @@ export const getBudget = async (req,res) => {
             data: data.budget,
             count: data.budget.length
         });
-        console.log("userId: ", user._id);
+        console.log("userId: ", userId._id);
     } catch (error) {
         console.log("Error in getBudget controller", error);
 
