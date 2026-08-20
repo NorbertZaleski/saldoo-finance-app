@@ -3,7 +3,7 @@ import User from "../models/User.model.js";
 
 class BudgetService {
     //Pobiera budżet usera
-    static async getUserBudget(userId){
+    static async getUserBudgets(userId){
         const user = await User.findById(userId);
 
         if (!user){
@@ -11,7 +11,7 @@ class BudgetService {
         }
 
         //user: req.user.id
-        const budget = await Budget.find({user: userId});
+        const budgets = await Budget.find({user: userId});
 
         return {
             user: {
@@ -19,7 +19,7 @@ class BudgetService {
                 name: user.name,
                 email: user.email
             },
-            budget: budget
+            budgets: budgets
         };
     }
 
