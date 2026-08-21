@@ -23,13 +23,13 @@ const Sidebar = () => {
 
   return (
     <aside className={`
-      fixed top-0 left-0 h-screen bg-gray-900 text-white
+      fixed top-0 left-0 h-screen bg-transparent text-white
       flex flex-col transition-all duration-300 ease-in-out
-      shadow-2xl z-50
+      shadow-2xl z-50 items-center justify-start p-4
       ${isCollapsed ? 'w-[72px]' : 'w-[250px]'}
     `}>
       {/* Logo */}
-      <div className="flex items-center justify-center h-16 border-b border-white/10">
+      <div className="flex items-center justify-center h-16 border-b border-white/10 bg-gray-800 rounded-2xl px-4 py-2 flex-shrink-0">
         {isCollapsed ? (
           <span className="text-3xl">💰</span>
         ) : (
@@ -49,46 +49,30 @@ const Sidebar = () => {
       </button>
 
       {/* Menu */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {menuItems.map((item) => (
-          <NavLink
-            key={item.id}
-            to={item.path}
-            className={({ isActive }) => `
-              flex items-center gap-3 px-3 py-2.5 rounded-xl
-              transition-all duration-200 text-gray-400 hover:text-white
-              hover:bg-white/10
-              ${isActive ? 'bg-primary-500/20 text-primary-400' : ''}
-              ${isCollapsed ? 'justify-center px-2' : ''}
-            `}
-          >
-            <span className="text-xl leading-none">{item.icon}</span>
-            {!isCollapsed && (
-              <span className="text-sm font-medium whitespace-nowrap">
-                {item.label}
-              </span>
-            )}
-          </NavLink>
-        ))}
-      </nav>
-
-      {/* Stopka - Wylogowanie */}
-      <div className="p-3 border-t border-white/10">
-        <button
-          onClick={handleLogout}
-          className={`
-            flex items-center gap-3 w-full px-3 py-2.5 rounded-xl
-            text-gray-400 hover:text-red-400 hover:bg-red-500/10
-            transition-all duration-200
-            ${isCollapsed ? 'justify-center px-2' : ''}
-          `}
-        >
-          <span className="text-xl leading-none">🚪</span>
-          {!isCollapsed && (
-            <span className="text-sm font-medium whitespace-nowrap">Wyloguj</span>
-          )}
-        </button>
-      </div>
+      <div className='flex-1 flex flex-col justify-center overflow-y-auto'>
+        <nav className="flex flex-col justify-center px-3 py-4 space-y-1 overflow-y-auto max-h-fit bg-gray-900 rounded-xl">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.id}
+              to={item.path}
+              className={({ isActive }) => `
+                flex items-center gap-3 px-3 py-2.5 rounded-xl
+                transition-all duration-200 text-gray-400 hover:text-white
+                hover:bg-white/10 
+                ${isActive ? 'bg-primary-500/20 text-primary-400' : ''}
+                ${isCollapsed ? 'justify-center px-2' : ''}
+              `}
+            >
+              <span className="text-2xl leading-none">{item.icon}</span>
+              {!isCollapsed && (
+                <span className="text-sm font-medium whitespace-nowrap">
+                  {item.label}
+                </span>
+              )}
+            </NavLink>
+          ))}
+        </nav>
+    </div>
     </aside>
   );
 };

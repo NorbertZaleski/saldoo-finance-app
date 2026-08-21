@@ -32,7 +32,7 @@ function App() {
         <Route path="/app/settings" element={<SettingsPage />} />
       </Route>
 
-      <Route path="*" element={<div>404 – Strona nie znaleziona</div>} />
+      <Route path="*" element={<div>Strona nie znaleziona</div>} />
     </Routes>
   )
 };
