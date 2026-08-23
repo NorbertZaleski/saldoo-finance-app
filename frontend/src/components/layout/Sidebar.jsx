@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import logo from '/src/assets/logo.png';
+
 const menuItems = [
   { id: 'dashboard', label: 'Kokpit', icon: '🏠', path: '/app/dashboard' },
   { id: 'transactions', label: 'Transakcje', icon: '💰', path: '/app/transactions' },
@@ -26,14 +28,14 @@ const Sidebar = () => {
       fixed top-0 left-0 h-screen bg-transparent text-white
       flex flex-col transition-all duration-300 ease-in-out
       shadow-2xl z-50 items-center justify-start p-4
-      ${isCollapsed ? 'w-[72px]' : 'w-[250px]'}
+      ${isCollapsed ? 'w-[72px]' : 'w-[270px]'}
     `}>
       {/* Logo */}
-      <div className="flex items-center justify-center h-16 border-b border-white/10 bg-gray-800 rounded-2xl px-4 py-2 flex-shrink-0">
+      <div className="flex items-center justify-center h-16 border-b border-white/20 bg-bg/60 rounded-2xl px-4 py-2 flex-shrink-0">
         {isCollapsed ? (
           <span className="text-3xl">💰</span>
         ) : (
-          <span className="text-2xl font-bold tracking-tight">Saldoo</span>
+          <div className="py-2"><img className='object-cover' src={logo} alt="Logo"/></div>
         )}
       </div>
 
