@@ -10,3 +10,4 @@ back:
 front:
 react-router-dom
 tailwindcss
+lucide-react

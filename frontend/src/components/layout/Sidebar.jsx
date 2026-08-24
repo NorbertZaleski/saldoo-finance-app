@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import logo from '/src/assets/logo.png';
+import logosm from '/src/assets/logo-sm.png';
+
+import {LayoutDashboard, ArrowLeftRight, Wallet, Brain, BookOpen, Settings } from 'lucide-react';
 
 const menuItems = [
-  { id: 'dashboard', label: 'Kokpit', icon: '🏠', path: '/app/dashboard' },
-  { id: 'transactions', label: 'Transakcje', icon: '💰', path: '/app/transactions' },
-  { id: 'budgets', label: 'Budżet', icon: '📊', path: '/app/budgets' },
-  { id: 'analysis', label: 'Analiza', icon: '📈', path: '/app/analysis' },
-  { id: 'education', label: 'Edukacja', icon: '📚', path: '/app/education' },
-  { id: 'settings', label: 'Ustawienia', icon: '⚙️', path: '/app/settings' },
+  { id: 'dashboard', label: 'Kokpit', icon: LayoutDashboard, path: '/app/dashboard' },
+  { id: 'transactions', label: 'Transakcje', icon: ArrowLeftRight, path: '/app/transactions' },
+  { id: 'budgets', label: 'Budżet', icon: Wallet, path: '/app/budgets' },
+  { id: 'analysis', label: 'Analiza', icon: Brain, path: '/app/analysis' },
+  { id: 'education', label: 'Edukacja', icon: BookOpen, path: '/app/education' },
+  { id: 'settings', label: 'Ustawienia', icon: Settings, path: '/app/settings' },
 ];
 
 const Sidebar = () => {
@@ -28,12 +31,13 @@ const Sidebar = () => {
       fixed top-0 left-0 h-screen bg-transparent text-white
       flex flex-col transition-all duration-300 ease-in-out
       shadow-2xl z-50 items-center justify-start p-4
-      ${isCollapsed ? 'w-[72px]' : 'w-[270px]'}
+      ${isCollapsed ? 'w-[130px]' : 'w-[270px]'}
     `}>
       {/* Logo */}
-      <div className="flex items-center justify-center h-16 border-b border-white/20 bg-bg/60 rounded-2xl px-4 py-2 flex-shrink-0">
+      <div className="flex items-center justify-center border-[0.5px] border-solid border-white/20 bg-bg/60 rounded-2xl px-4 py-2 
+      flex-shrink-0 shadow-lg/25  ">
         {isCollapsed ? (
-          <span className="text-3xl">💰</span>
+         <div className="py-2"><img className='object-cover w-[59px] h-auto' src={logosm} alt="Logo"/></div>
         ) : (
           <div className="py-2"><img className='object-cover' src={logo} alt="Logo"/></div>
         )}
@@ -52,8 +56,10 @@ const Sidebar = () => {
 
       {/* Menu */}
       <div className='flex-1 flex flex-col justify-center overflow-y-auto'>
-        <nav className="flex flex-col justify-center px-3 py-4 space-y-1 overflow-y-auto max-h-fit bg-gray-900 rounded-xl">
-          {menuItems.map((item) => (
+        <nav className="flex flex-col justify-center px-3 py-4 space-y-1 overflow-y-auto max-h-fit w-fit bg-gray-900 rounded-xl">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            return (
             <NavLink
               key={item.id}
               to={item.path}
@@ -65,14 +71,18 @@ const Sidebar = () => {
                 ${isCollapsed ? 'justify-center px-2' : ''}
               `}
             >
-              <span className="text-2xl leading-none">{item.icon}</span>
+              <Icon size={32}
+              className='flex-shrink-0'
+              strokeWidth={1.5}
+              />
               {!isCollapsed && (
-                <span className="text-sm font-medium whitespace-nowrap">
+                <span className="text-lg font-medium whitespace-nowrap">
                   {item.label}
                 </span>
               )}
             </NavLink>
-          ))}
+          );
+          })}
         </nav>
     </div>
     </aside>
