@@ -1,8 +1,12 @@
+import LoggedOutLayout from "../components/layout/LoggedOutLayout";
+
 const LoginPage = () => {
     return (
-        <div className="">
-            login
-        </div>
+        <LoggedOutLayout>
+            <div className="">
+                login
+            </div>
+        </LoggedOutLayout>
     );
 };
 

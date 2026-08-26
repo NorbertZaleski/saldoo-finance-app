@@ -85,6 +85,10 @@ const Sidebar = () => {
           })}
         </nav>
     </div>
+
+    <div className='px-3 py-5'>
+      <span onClick={()=> navigate('/login')}>Logout</span>
+    </div>
     </aside>
   );
 };
