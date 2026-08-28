@@ -1,4 +1,3 @@
-import React from 'react';
 import WidgetGridLayout from '../components/layout/WidgetGridLayout';
 
 // Przykładowe widżety

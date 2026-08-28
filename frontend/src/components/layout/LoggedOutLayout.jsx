@@ -65,6 +65,7 @@ const LoggedOutLayout = ({
                     <input 
                         type="text" 
                         placeholder="Imię i nazwisko" 
+                        required
                         className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
                     )}
@@ -73,25 +74,30 @@ const LoggedOutLayout = ({
                     type="email" 
                     placeholder="Adres email" 
                     className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     />
 
                     {!isLogin && (
                     <input 
-                        type="text" 
-                        placeholder="Nazwa użytkownika" 
+                        type="text"
+                        placeholder="Nazwa użytkownika"
+                        required
                         className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
                     )}
                     <input 
-                    type="password" 
-                    placeholder="Hasło" 
+                    type="password"
+                    placeholder="Hasło"
+                    required
                     className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
 
                     {showConfirmPassword && (
                     <input 
                         type="password" 
-                        placeholder="Potwierdź hasło" 
+                        placeholder="Potwierdź hasło"
+                        required
                         className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
                     )}
