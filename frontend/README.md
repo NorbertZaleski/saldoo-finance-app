@@ -12,3 +12,4 @@ react-router-dom
 tailwindcss
 lucide-react
 clsx
+axios

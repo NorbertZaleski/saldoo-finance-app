@@ -8,11 +8,14 @@ export const getBudgets = async (req,res) => {
 
         const data = await BudgetService.getUserBudgets(userId);
 
+        console.log("✅ Pobrano budżet dla userId:", userId);
+        console.log("📊 Liczba budżetów:", data.budgets?.length || 0);
+
         res.status(200).json({
             success: true,
             user: data.user,
-            data: data.budget,
-            count: data.budget.length
+            data: data.budgets,
+            count: data.budgets.length
         });
         console.log("userId: ", userId._id);
     } catch (error) {

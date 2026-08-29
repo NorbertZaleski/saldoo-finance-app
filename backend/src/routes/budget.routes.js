@@ -7,7 +7,7 @@ const router = express.Router();
 //middleware auth
 //router.use(protect);
 
-router.get("/:id", getBudgets);
+router.get("/", getBudgets);
 router.post("/", createBudget);
 router.put("/:id", );
 router.delete("/:id", );
