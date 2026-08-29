@@ -9,6 +9,7 @@ export default {
       colors: {
         'bg': '#3E1352', //30% & overlay = 60%
         'bg-lighter': '3077BE', //20% & lighter+ = 30%
+        'bg-highlight': 'F5F5F5' //5%
       }
     },
   },
