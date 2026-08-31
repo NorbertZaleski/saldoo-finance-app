@@ -17,11 +17,6 @@ const budgetSchema = new mongoose.Schema({
         required: [true, 'Limit jest wymagany'],
         min: [0.01, 'Limit musi być większy od 0']
     },
-    period: {
-        type: String,
-        default: 'monthly',
-        enum: ['monthly', 'yearly']
-    },
     month: {
         type: Number,
         min: 0,

@@ -30,7 +30,7 @@ export const budgetService = {
             const response = await api.get('/budget');
             return response.data;
         } catch (error) {
-            console.error('❌ Błąd pobierania budżetu:', error);
+            console.error('Błąd pobierania budżetu:', error);
             throw error.response?.data || error;
         }
     },

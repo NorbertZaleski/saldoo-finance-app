@@ -72,7 +72,6 @@ export function useBudgets() {
             name: `Budżet ${now.toLocaleString('pl-PL', { month: 'long' })} ${year}`,
             categories: [initialCategory],
             limit: 5000,
-            period: 'monthly',
             month,
             year,
             isActive: true,
