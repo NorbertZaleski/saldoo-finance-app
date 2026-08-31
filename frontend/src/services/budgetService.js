@@ -41,7 +41,7 @@ export const budgetService = {
             const response = await api.post('/budget', budgetData);
             return response.data;
         } catch (error) {
-            console.error('❌ Błąd tworzenia budżetu:', error);
+            console.error('Błąd tworzenia budżetu:', error);
             throw error.response?.data || error;
         }
     },
@@ -52,7 +52,7 @@ export const budgetService = {
             const response = await api.post(`/budget/${budgetId}/categories`, categoryData);
             return response.data;
         } catch (error) {
-            console.error('❌ Błąd dodawania kategorii:', error);
+            console.error('Błąd dodawania kategorii:', error);
             throw error.response?.data || error;
         }
     },
@@ -66,7 +66,7 @@ export const budgetService = {
             );
             return response.data;
         } catch (error) {
-            console.error('❌ Błąd dodawania wydatku:', error);
+            console.error('Błąd dodawania wydatku:', error);
             throw error.response?.data || error;
         }
     }

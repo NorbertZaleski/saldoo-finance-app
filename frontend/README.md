@@ -6,6 +6,7 @@ env
 mongoose
 jwt token
 bcrypt
+cors
 
 front:
 react-router-dom
