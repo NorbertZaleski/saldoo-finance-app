@@ -4,7 +4,7 @@ import AddCategoryForm from '../components/budget/AddCategoryForm';
 import MonthYearPicker from '../components/budget/MonthYearPicker';
 import { useBudgetForMonth } from '../hooks/useBudgetForMonth';
 import { formatCurrency } from '../utils/budgetFormat';
-import { budgetService } from '../services/budgetService';
+import { budgetService } from '../services/budget.service';
 
 const BudgetPage = () => {
     const {
@@ -76,7 +76,7 @@ const BudgetPage = () => {
                             onClick={() => setShowAddForm(true)}
                             className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition font-semibold mt-4"
                         >
-                            + Stwórz budżet
+                            Stwórz budżet
                         </button>
                     ) : (
                         <div className="text-left">

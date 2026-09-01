@@ -8,7 +8,7 @@ import authRoutes from "./auth.routes.js";
 const router = express.Router();
 
 router.use('/auth', authRoutes);
-router.use("/account", accountRoutes);
+router.use("/accounts", accountRoutes);
 router.use("/budget", budgetRoutes);
 router.use("/education", educationRoutes);
 router.use("/user", userRoutes);

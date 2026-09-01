@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { budgetService } from '../services/budgetService';
+import { budgetService } from '../services/budget.service';
 import { formatBudgetEntry, extractBudgetsList } from '../utils/budgetFormat';
 
 export function useBudgets() {
