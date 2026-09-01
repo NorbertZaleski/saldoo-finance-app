@@ -16,14 +16,18 @@ const AddAccountForm = ({ onSubmit, onCancel }) => {
         const formData = new FormData(e.target);
         const preset = ACCOUNT_TYPES.find((t) => t.value === type);
 
-        onSubmit({
+        const formValues = {
             name: formData.get('name'),
-            type,
+            type: type,
             icon: preset?.icon || '📁',
             currency: 'PLN',
             balance: parseFloat(formData.get('balance')) || 0,
             source: 'manual'
-        });
+        };
+
+        // Pass data to parent
+        onSubmit(formValues);
+
         e.target.reset();
         setType('cash');
     };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/';
+const API_URL = '/accounts';
 
 const getToken = () => localStorage.getItem('token');
 
@@ -25,7 +25,7 @@ api.interceptors.request.use(
 export const accountService = {
     getAccounts: async () => {
         try {
-            const response = await api.get('/accounts');
+            const response = await api.get('/');
             return response.data;
         } catch (error) {
             console.error('Błąd pobierania kont:', error);
@@ -35,7 +35,7 @@ export const accountService = {
 
     createAccount: async (accountData) => {
         try {
-            const response = await api.post('/accounts', accountData);
+            const response = await api.post('/', accountData);
             return response.data;
         } catch (error) {
             console.error('Błąd tworzenia konta:', error);
@@ -45,7 +45,7 @@ export const accountService = {
 
     updateAccount: async (accountId, accountData) => {
         try {
-            const response = await api.patch(`/accounts/${accountId}`, accountData);
+            const response = await api.patch(`/${accountId}`, accountData);
             return response.data;
         } catch (error) {
             console.error('Błąd aktualizacji konta:', error);
@@ -55,7 +55,7 @@ export const accountService = {
 
     deleteAccount: async (accountId) => {
         try {
-            const response = await api.delete(`/accounts/${accountId}`);
+            const response = await api.delete(`/${accountId}`);
             return response.data;
         } catch (error) {
             console.error('Błąd usuwania konta:', error);

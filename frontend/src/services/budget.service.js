@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/';
+const API_URL = '/budget';
 
 const getToken = () => localStorage.getItem('token');
 
@@ -27,7 +27,7 @@ export const budgetService = {
     // Pobierz budżet
     getBudget: async () => {
         try {
-            const response = await api.get('/budget');
+            const response = await api.get('/');
             return response.data;
         } catch (error) {
             console.error('Błąd pobierania budżetu:', error);
@@ -38,7 +38,7 @@ export const budgetService = {
     // Stwórz budżet
     createBudget: async (budgetData) => {
         try {
-            const response = await api.post('/budget', budgetData);
+            const response = await api.post('/', budgetData);
             return response.data;
         } catch (error) {
             console.error('Błąd tworzenia budżetu:', error);
@@ -49,7 +49,7 @@ export const budgetService = {
     // Dodaj kategorię
     addCategory: async (budgetId, categoryData) => {
         try {
-            const response = await api.post(`/budget/${budgetId}/categories`, categoryData);
+            const response = await api.post(`/${budgetId}/categories`, categoryData);
             return response.data;
         } catch (error) {
             console.error('Błąd dodawania kategorii:', error);
@@ -61,7 +61,7 @@ export const budgetService = {
     addExpense: async (budgetId, categoryId, expenseData) => {
         try {
             const response = await api.post(
-                `/budget/${budgetId}/categories/${categoryId}/expenses`,
+                `/${budgetId}/categories/${categoryId}/expenses`,
                 expenseData
             );
             return response.data;

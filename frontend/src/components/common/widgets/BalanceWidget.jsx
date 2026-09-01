@@ -4,8 +4,7 @@ import { formatCurrency } from '../../../utils/budgetFormat';
 import Widget from './Widget';
 import { useState } from 'react';
 import AddAccountForm from './addAccountForm';
-import { createAccount } from '../../../../../backend/src/controllers/account.controller';
-createAccount
+import { accountService } from '../../../services/account.service';
 
 const BalanceWidget = ({ 
   currency = 'zł',
@@ -20,7 +19,7 @@ const [submitting, setSubmitting] = useState(false);
 const handleAddAccount = async (accountData) => {
   try {
     setSubmitting(true);
-    await createAccount(accountData);
+    await accountService.createAccount(accountData);
     setShowAddForm(false);
   } catch (err) {
     console.error('Nie udało się dodać konta:', err);
@@ -55,7 +54,7 @@ const handleAddAccount = async (accountData) => {
             
             {!loading && !error && accounts.length > 0 && (
               <div>
-                {acccounts.map((acc) => (
+                {accounts.map((acc) => (
                   <div key={acc._id} className='flex items-center justify-between text-sm'>
                     <span>
                       <span>{acc.icon} || bankicona</span>

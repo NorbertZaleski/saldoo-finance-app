@@ -6,8 +6,8 @@ const router = express.Router();
 //router.use(protect);
 
 router.get("/", getAccounts);
-router.patch("/", createAccount)
-router.get("/:id", updateAccount);
-router.get("/:id", deleteAccount);
+router.post("/", createAccount)
+router.patch("/:id", updateAccount);
+router.delete("/:id", deleteAccount);
 
 export default router;
