@@ -18,6 +18,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
+//później TODO - app.use(cookieParser());
+//install cookie-parser
 
 app.use("/", routes);
 
@@ -25,6 +27,3 @@ app.listen(PORT, () => {
     console.log("Server started on ", PORT);
     console.log('🔑 JWT_SECRET exists:', !!process.env.JWT_SECRET);
 });
-
-//ogarnac modele/kontrollery
-//teraz robie category

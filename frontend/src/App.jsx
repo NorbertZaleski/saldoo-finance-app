@@ -15,9 +15,14 @@ import RegisterPage from './pages/RegisterPage';
 
 function App() {
 
+  function RootRedirect() {
+    const token = localStorage.getItem("token");
+    return token ?  <Navigate to="/app" replace /> : <Navigate to="/login" replace />;
+  }
+
   return (
     <Routes>
-      <Route path="/" element={<HomePage/>}/>
+      <Route path="/" element={<RootRedirect/>}/>
 
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />

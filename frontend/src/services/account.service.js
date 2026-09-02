@@ -1,16 +1,13 @@
 import axios from 'axios';
 
-const API_URL = '/accounts';
-
 const getToken = () => localStorage.getItem('token');
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: 'http://localhost:5001',
     headers: {
         'Content-Type': 'application/json'
     }
 });
-
 api.interceptors.request.use(
     (config) => {
         const token = getToken();
@@ -25,7 +22,7 @@ api.interceptors.request.use(
 export const accountService = {
     getAccounts: async () => {
         try {
-            const response = await api.get('/');
+            const response = await api.get('/accounts');
             return response.data;
         } catch (error) {
             console.error('Błąd pobierania kont:', error);
@@ -35,7 +32,7 @@ export const accountService = {
 
     createAccount: async (accountData) => {
         try {
-            const response = await api.post('/', accountData);
+            const response = await api.post('/accounts', accountData);
             return response.data;
         } catch (error) {
             console.error('Błąd tworzenia konta:', error);
@@ -45,7 +42,7 @@ export const accountService = {
 
     updateAccount: async (accountId, accountData) => {
         try {
-            const response = await api.patch(`/${accountId}`, accountData);
+            const response = await api.patch(`/accounts/${accountId}`, accountData);
             return response.data;
         } catch (error) {
             console.error('Błąd aktualizacji konta:', error);
@@ -55,7 +52,7 @@ export const accountService = {
 
     deleteAccount: async (accountId) => {
         try {
-            const response = await api.delete(`/${accountId}`);
+            const response = await api.delete(`/accounts/${accountId}`);
             return response.data;
         } catch (error) {
             console.error('Błąd usuwania konta:', error);

@@ -3,10 +3,10 @@ import { createAccount, deleteAccount, getAccounts, updateAccount } from "../con
 import { protect } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
-//router.use(protect);
+router.use(protect);
 
 router.get("/", getAccounts);
-router.post("/", createAccount)
+router.post("/", createAccount);
 router.patch("/:id", updateAccount);
 router.delete("/:id", deleteAccount);
 
