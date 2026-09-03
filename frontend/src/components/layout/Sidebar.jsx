@@ -55,7 +55,7 @@ const Sidebar = () => {
       
       {/*Menu*/}
       <div className='flex-1 flex flex-col justify-center overflow-y-auto'>
-        <nav className="flex flex-col justify-center px-3 py-6 space-y-6 overflow-y-auto max-h-fit w-fit bg-bg/60 backdrop-blur-md border-[0.5px] border-solid border-white/20 rounded-xl">
+        <nav className="flex flex-col justify-center px-3 py-6 space-y-6 overflow-y-auto max-h-fit w-fit bg-bg/40 backdrop-blur-md border-[0.5px] border-solid border-white/20 rounded-xl">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
