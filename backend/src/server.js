@@ -3,12 +3,11 @@ import routes from "./routes/index.js";
 import {connectDB} from "./config/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
+import rateLimiter from "./middleware/rateLimiter.middleware.js";
 dotenv.config();
 
 const app = express();
 const PORT= process.env.PORT || 5001;
-
-connectDB();
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -17,13 +16,17 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+app.set('trust proxy', 1);
+
 app.use(express.json());
-//później TODO - app.use(cookieParser());
-//install cookie-parser
+app.use(rateLimiter);
 
 app.use("/", routes);
 
-app.listen(PORT, () => {
-    console.log("Server started on ", PORT);
-    console.log('🔑 JWT_SECRET exists:', !!process.env.JWT_SECRET);
+connectDB().then(()=> {
+    app.listen(PORT, () => {
+        console.log("Server started on ", PORT);
+        console.log('🔑 JWT_SECRET exists:', !!process.env.JWT_SECRET);
+    });
 });
+

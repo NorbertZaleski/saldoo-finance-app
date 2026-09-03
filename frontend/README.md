@@ -7,6 +7,8 @@ mongoose
 jwt token
 bcrypt
 cors
+@upstash/redis @upstash/ratelimit
+
 
 front:
 react-router-dom

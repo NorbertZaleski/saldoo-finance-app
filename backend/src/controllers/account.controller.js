@@ -47,7 +47,6 @@ export const createAccount = async (req, res) => {
             bankName,
             color,
             type,
-            icon: icon || "wallet",
             currency,
             balance,
             accountNumberLast4,
@@ -71,7 +70,7 @@ export const updateAccount = async(req,res) => {
             return res.status(404).json({message: "Nie znaleziono konta."});
         }
 
-        const allowedFields =['name', 'bankName', 'color', 'type', 'icon', 'currency', 'balance', 'accountNumberLast4', 'isActive'];
+        const allowedFields =['name', 'bankName', 'color', 'type', 'currency', 'balance', 'accountNumberLast4', 'isActive'];
         allowedFields.forEach((field) => {
             if (req.body[field] !==undefined) {
                 account[field] = req.body[field];
@@ -89,19 +88,21 @@ export const updateAccount = async(req,res) => {
     }
 };
 
-export const deleteAccount = async(req,res) => {
+export const deleteAccount = async (req, res) => {
     try {
-        const account = await Account.findOne({_id: req.params.id, user: req.user.id});
-        if (!account) {
-            return res.status(404).json({message: "Nie znaleziono konta."});
-        }
-        
-        account.isActive = false;
-        await account.save();
+        const account = await Account.findOneAndUpdate(
+            { _id: req.params.id, user: req.user.id },
+            { isActive: false },
+            { new: true, runValidators: false }
+        );
 
-        res.status(200).json({message: "Konto zostało usunięte."});
+        if (!account) {
+            return res.status(404).json({ message: "Nie znaleziono konta." });
+        }
+
+        res.status(200).json({ message: "Konto zostało usunięte." });
     } catch (error) {
-        console.log("Error in deleteAccount controller", error);
+        console.error("Error in deleteAccount controller", error);
         res.status(500).json({
             success: false,
             message: "Internal server error"

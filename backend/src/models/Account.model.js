@@ -19,7 +19,8 @@ const accountSchema = new mongoose.Schema(
         },
         icon: {
             type: String,
-            default: '🏦'
+            default: 'PiggyBank',
+            enum: ['PiggyBank', 'Wallet', 'Landmark', 'CreditCard', 'Banknote']
         },
         color: {
             type: String,

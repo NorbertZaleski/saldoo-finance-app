@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authService } from "../../services/auth.service";
 
 const LoggedOutLayout = ({ 
   children, 
@@ -8,12 +10,18 @@ const LoggedOutLayout = ({
   isLogin,
   showNameField = false,
   showConfirmPassword = false,
-  alternativeText = "-- Lub --",
   googleButtonText = "Kontynuuj z Google",
   showRedirectButton = true
 }) => {
 
     const navigate = useNavigate();
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleAlternativeRedirect = () => {
         if (isLogin) {
@@ -21,8 +29,31 @@ const LoggedOutLayout = ({
         } else {
             navigate('/login');
         }
-        };
+    };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        if (!isLogin && password !== confirmPassword) {
+            setError("Hasła nie są takie same");
+            return;
+        }
+
+        setLoading(true);
+        try {
+            if (isLogin) {
+                await authService.login(email, password);
+            } else {
+                await authService.register(name, email, password);
+            }
+            navigate('/app', { replace: true });
+        } catch (err) {
+            setError(err.message || 'Coś poszło nie tak, spróbuj ponownie');
+        } finally {
+            setLoading(false);
+        }
+    };
 
   return (
     <div 
@@ -59,13 +90,21 @@ const LoggedOutLayout = ({
                 <p className="text-white/60 text-center mb-6">
                   {subtitle}
                 </p>
+
+                {error && (
+                  <div className="mb-4 p-3 bg-red-500/20 border border-red-500/40 rounded-lg text-red-200 text-sm">
+                    {error}
+                  </div>
+                )}
                 
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                     {showNameField && (
                     <input 
                         type="text" 
                         placeholder="Imię i nazwisko" 
                         required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
                     )}
@@ -75,21 +114,17 @@ const LoggedOutLayout = ({
                     placeholder="Adres email" 
                     className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     required
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                     />
 
-                    {!isLogin && (
-                    <input 
-                        type="text"
-                        placeholder="Nazwa użytkownika"
-                        required
-                        className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
-                    />
-                    )}
                     <input 
                     type="password"
                     placeholder="Hasło"
                     required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
 
@@ -98,12 +133,18 @@ const LoggedOutLayout = ({
                         type="password" 
                         placeholder="Potwierdź hasło"
                         required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         className="w-full p-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500 text-white"
                     />
                     )}
 
-                    <button className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition font-semibold">
-                    {buttonText}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition font-semibold disabled:opacity-50"
+                    >
+                    {loading ? '...' : buttonText}
                     </button>
                   
                     <div className="flex items-center gap-4 text-white/60">
@@ -112,7 +153,7 @@ const LoggedOutLayout = ({
                         <div className="flex-1 h-px bg-white/20"></div>
                     </div>
                   
-                    <button className="w-full bg-white/10 text-white p-3 rounded-lg hover:bg-white/20 transition font-semibold border border-white/20">
+                    <button type="button" className="w-full bg-white/10 text-white p-3 rounded-lg hover:bg-white/20 transition font-semibold border border-white/20">
                         {googleButtonText}
                     </button>
                   

@@ -1,6 +1,7 @@
-import { Plus } from 'lucide-react';
-import { useAccounts } from '../../../hooks/useAccounts';
+import { Plus, Trash } from 'lucide-react';
+import { useAccounts} from '../../../hooks/useAccounts';
 import { formatCurrency } from '../../../utils/budgetFormat';
+import { getAccountIcon } from '../../../utils/accountIcons';
 import Widget from './Widget';
 import { useState } from 'react';
 import AddAccountForm from './addAccountForm';
@@ -12,7 +13,7 @@ const BalanceWidget = ({
   className = ''
   }) => {
 
-const { accounts, totalBalance, loading, error } = useAccounts();
+const { accounts, totalBalance, loading, error, reload } = useAccounts();
 const [showAddForm, setShowAddForm] = useState(false);
 const [submitting, setSubmitting] = useState(false);
 
@@ -21,12 +22,22 @@ const handleAddAccount = async (accountData) => {
     setSubmitting(true);
     await accountService.createAccount(accountData);
     setShowAddForm(false);
+    await reload();
   } catch (err) {
     console.error('Nie udało się dodać konta:', err);
   } finally {
     setSubmitting(false);
   }
 };
+
+const handleDeleteAccount = async (accountId) => {
+  try {
+    await accountService.deleteAccount(accountId);
+    await reload();
+  } catch (err) {
+        console.error('Nie udało się usunąć konta:', err);
+  }
+}
 
   return (
     <Widget size={size} className={className}>
@@ -54,17 +65,20 @@ const handleAddAccount = async (accountData) => {
             
             {!loading && !error && accounts.length > 0 && (
               <div>
-                {accounts.map((acc) => (
+                {accounts.map((acc) => {
+                  const IconComponent = getAccountIcon(acc.icon);
+                  return (
                   <div key={acc._id} className='flex items-center justify-between text-sm'>
-                    <span>
-                      <span>{acc.icon} || bankicona</span>
+                    <span className='flex items-center gap-2'>
+                      <IconComponent size={16} className="text-white/70"/>
                       {acc.name}
                     </span>
                     <span>
                       {formatCurrency(acc.balance, acc.currency || currency)}
                     </span>
+                      <button onClick={()=> handleDeleteAccount(acc._id)}><Trash size={16} className='text-white/70'/></button>
                   </div>
-                ))}
+                )})}
               </div>
             )}
 
