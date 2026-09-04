@@ -28,13 +28,13 @@ const Sidebar = () => {
 
   return (
     <aside className={`
-      fixed top-0 left-0 h-screen bg-transparent text-white
+      fixed top-3 left-3 h-screen text-white bg-[radial-gradient(at_left_top,_rgba(45,24,84,1)_0%,_rgba(44,66,128,1)_50%,_rgba(107,182,219,1)_100%)]
       flex flex-col transition-all duration-300 ease-in-out
       shadow-2xl z-50 items-center justify-start p-4
-      ${isCollapsed ? 'w-[130px]' : 'w-[270px]'}
+      ${isCollapsed ? 'w-[130px]' : 'w-[200px]'}
     `}>
       {/*Logo*/}
-      <div className="flex items-center justify-center border-[0.5px] border-solid border-white/20 bg-bg/60 rounded-2xl px-4 py-2 
+      <div className="flex items-center justify-center border-[0.5px] border-solid border-white/20 bg-bg-overlay rounded-2xl px-4 py-2 
       flex-shrink-0 shadow-lg/25">
         {isCollapsed ? (
          <div className="py-2"><img className='object-cover w-[59px] h-auto' src={logosm} alt="Logo"/></div>
@@ -55,7 +55,7 @@ const Sidebar = () => {
       
       {/*Menu*/}
       <div className='flex-1 flex flex-col justify-center overflow-y-auto'>
-        <nav className="flex flex-col justify-center px-3 py-6 space-y-6 overflow-y-auto max-h-fit w-fit bg-bg/40 backdrop-blur-md border-[0.5px] border-solid border-white/20 rounded-xl">
+        <nav className="flex flex-col justify-center px-3 py-6 space-y-6 overflow-y-auto max-h-fit w-fit rounded-xl">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
