@@ -61,7 +61,45 @@ export const createBudget = async(req,res) => {
 };
 
 export const updateBudget = async(req, res) => {
+    try {
+        const budget = await Budget.findOne({_id: req.params.id});
 
+        if (!budget) {
+            return res.status(404).json({message: "Nie znaleziono budżetu."});
+        }
+
+        const allowedFields =['categories', 'limit', 'alertThreshold'];
+        allowedFields.forEach((field) => {
+            if (req.body[field] !==undefined) {
+                budget[field] = req.body[field];
+            }
+        });
+
+        await budget.save();
+        res.status(200).json(budget);
+    } catch (error) {
+        console.log("Error in updateBudget controller", error);
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+};
+
+export const addSubcategory = async (req, res) => {
+    try {
+        const { budgetId, categoryId } = req.params;
+        const category = await BudgetService.addSubcategory(
+            req.user.id,
+            budgetId,
+            categoryId,
+            req.body
+        );
+        res.status(201).json({ success: true, category });
+    } catch (error) {
+        console.error('Error in addSubcategory controller', error);
+        res.status(400).json({ success: false, message: error.message });
+    }
 };
 
 export const deleteBudget = async(req, res) => {

@@ -48,12 +48,12 @@ const BudgetCategoryList = ({
         <div className={`space-y-3 ${listHeight} overflow-y-auto pr-1 custom-scrollbar`}>
             {categories.map((category) => {
                 const progress = calculateProgress(category.spent, category.budget);
-                const isExpanded = expandedCategories.includes(category.id);
+                const isExpanded = expandedCategories.includes(category._id);
                 const hasSubcategories = category.subcategories && category.subcategories.length > 0;
 
                 return (
                     <div
-                        key={category.id}
+                        key={category._id}
                         className="bg-white/5 rounded-lg p-3 hover:bg-white/10 transition"
                     >
                         <div className="flex items-center justify-between">
@@ -64,7 +64,7 @@ const BudgetCategoryList = ({
                                         <span className="font-medium text-white">{category.name}</span>
                                         {hasSubcategories && (
                                             <button
-                                                onClick={() => toggleExpand(category.id)}
+                                                onClick={() => toggleExpand(category._id)}
                                                 className="text-white/40 hover:text-white/60 transition text-xs"
                                             >
                                                 {isExpanded ? '▼' : '▶'}
@@ -95,7 +95,7 @@ const BudgetCategoryList = ({
                                             <Edit2 size={14} />
                                         </button>
                                         <button
-                                            onClick={() => onDeleteCategory?.(category.id)}
+                                            onClick={() => onDeleteCategory?.(category._id)}
                                             className="p-1 hover:bg-white/10 rounded transition text-white/40 hover:text-red-400"
                                         >
                                             <Trash2 size={14} />
@@ -123,7 +123,7 @@ const BudgetCategoryList = ({
                         {hasSubcategories && isExpanded && (
                             <div className="ml-8 mt-3 space-y-2 border-l border-white/10 pl-3">
                                 {category.subcategories.map((sub) => (
-                                    <div key={sub.id} className="flex items-center justify-between text-sm">
+                                    <div key={sub._id} className="flex items-center justify-between text-sm">
                                         <div className="flex items-center gap-2">
                                             <span className="text-white/60">{sub.icon || '•'}</span>
                                             <span className="text-white/80">{sub.name}</span>

@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const API_URL = '/budget';
 
 const getToken = () => localStorage.getItem('token');
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: 'http://localhost:5001/budget',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -53,6 +52,20 @@ export const budgetService = {
             return response.data;
         } catch (error) {
             console.error('Błąd dodawania kategorii:', error);
+            throw error.response?.data || error;
+        }
+    },
+
+    // Dodaj podkategorię
+    addSubcategory: async (budgetId, categoryId, subcategoryData) => {
+        try {
+            const response = await api.post(
+                `/${budgetId}/categories/${categoryId}/subcategories`,
+                subcategoryData
+            );
+            return response.data;
+        } catch (error) {
+            console.error('Błąd dodawania podkategorii:', error);
             throw error.response?.data || error;
         }
     },

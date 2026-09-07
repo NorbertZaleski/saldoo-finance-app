@@ -8,7 +8,6 @@ const subcategorySchema = new mongoose.Schema({
         required: [true, 'Nazwa subkategorii jest wymagana'],
         trim: true
     },
-    // Nazwa komponentu z lucide-react, np. "Fuel", "ShoppingCart" — nie emoji.
     icon: {
         type: String,
         default: 'Circle',
@@ -37,8 +36,6 @@ const categorySchema = new mongoose.Schema({
         trim: true,
         maxlength: [50, 'Nazwa kategorii jest za długa']
     },
-    // Nazwa komponentu z lucide-react (np. "Home", "Car", "ShoppingBag").
-    // Frontend mapuje ten string na konkretny komponent ikony.
     icon: {
         type: String,
         default: 'Circle',

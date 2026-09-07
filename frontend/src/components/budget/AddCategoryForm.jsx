@@ -115,7 +115,7 @@ const AddCategoryForm = ({
                                     — Nowa nadkategoria —
                                 </option>
                                 {parentCategories.map((c) => (
-                                    <option key={c.id} value={c.id} className="bg-slate-800">
+                                    <option key={c._id} value={c._id} className="bg-slate-800">
                                         {c.icon} {c.name}
                                     </option>
                                 ))}

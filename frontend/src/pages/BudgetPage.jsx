@@ -66,7 +66,6 @@ const BudgetPage = () => {
 
             {!budgetData ? (
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-md text-center border border-white/20">
-                    <div className="text-6xl mb-4">💰</div>
                     <h2 className="text-xl font-bold text-white mb-2">
                         Brak budżetu na wybrany miesiąc
                     </h2>

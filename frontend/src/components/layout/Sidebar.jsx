@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '/src/assets/logo.png';
 import logosm from '/src/assets/logo-sm.png';
 
-import {LayoutDashboard, ArrowLeftRight, Wallet, Brain, BookOpen, Settings } from 'lucide-react';
+import {LayoutDashboard, ArrowLeftRight, Wallet, Brain, BookOpen, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const menuItems = [
   { id: 'dashboard', label: 'Kokpit', icon: LayoutDashboard, path: '/app/dashboard' },
@@ -28,31 +28,34 @@ const Sidebar = () => {
 
   return (
     <aside className={`
-      fixed top-3 left-3 h-screen text-white bg-[radial-gradient(at_left_top,_rgba(45,24,84,1)_0%,_rgba(44,66,128,1)_50%,_rgba(107,182,219,1)_100%)]
-      flex flex-col transition-all duration-300 ease-in-out
-      shadow-2xl z-50 items-center justify-start p-4
-      ${isCollapsed ? 'w-[130px]' : 'w-[200px]'}
+      fixed top-1/2 -translate-y-1/2 left-5 h-4/5 text-white bg-bg rounded-2xl
+      flex flex-col 
+      transition-[250px] duration-300 ease-out
+      shadow-2xl z-50 items-center justify-start p-4 md-2 overflow-hidden 
+      ${isCollapsed ? 'w-[130px]' : 'w-[250px]'} 
     `}>
-      {/*Logo*/}
-      <div className="flex items-center justify-center border-[0.5px] border-solid border-white/20 bg-bg-overlay rounded-2xl px-4 py-2 
-      flex-shrink-0 shadow-lg/25">
-        {isCollapsed ? (
-         <div className="py-2"><img className='object-cover w-[59px] h-auto' src={logosm} alt="Logo"/></div>
-        ) : (
-          <div className="py-2"><img className='object-cover' src={logo} alt="Logo"/></div>
-        )}
-      </div>
-      {/*Przycisk zwijania*/}
-      <button
-        onClick={toggleSidebar}
-        className="absolute top-4 -right-3 w-6 h-6 bg-primary-500 hover:bg-primary-600 
-                   text-white text-xs rounded-full flex items-center justify-center
-                   transition-all duration-200 shadow-md hover:shadow-lg
-                   focus:outline-none focus:ring-2 focus:ring-primary-400"
-      >
-        {isCollapsed ? '→' : '←'}
-      </button>
       
+      <div className='flex flex-col items-center justify-between'>
+        {/*Logo*/}
+        <div className="flex items-center justify-center px-4 py-2 flex-shrink-0 shadow-lg/25">
+          {isCollapsed ? (
+          <div className="py-2"><img className='object-cover w-[60px] h-auto' src={logosm} alt="Logo"/></div>
+          ) : (
+            <div className="py-2"><img className='object-cover' src={logo} alt="Logo"/></div>
+          )}
+        </div>
+        {/*Przycisk zwijania*/}
+        <button
+          onClick={toggleSidebar}
+          className="absolute top-4 right-3 w-6 h-6 bg-primary-500 hover:bg-primary-600 
+                    text-white text-xs rounded-lg flex items-center justify-center border-[0.5px]
+                    transition-all duration-200 shadow-md hover:shadow-lg
+                    focus:outline-none focus:ring-2 focus:ring-primary-400"
+        >
+          {isCollapsed ? <ChevronRight/> : <ChevronLeft/>}
+        </button>
+      </div>
+
       {/*Menu*/}
       <div className='flex-1 flex flex-col justify-center overflow-y-auto'>
         <nav className="flex flex-col justify-center px-3 py-6 space-y-6 overflow-y-auto max-h-fit w-fit rounded-xl">
@@ -67,7 +70,7 @@ const Sidebar = () => {
                 transition-all duration-200 text-white font-medium hover:text-white bg-highlight
                 hover:bg-white/10 border-[0.5px] border-solid border-white/20
                 ${isActive ? 'bg-primary-500/20 text-primary-400' : ''}
-                ${isCollapsed ? 'justify-center px-2' : ''}
+                ${isCollapsed ? 'justify-left px-2' : ''}
               `}
             >
               <Icon size={32}

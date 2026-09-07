@@ -1,5 +1,7 @@
 import Budget from "../models/Budget.model.js";
 import User from "../models/User.model.js";
+import Category from "../models/Category.model.js";
+import mongoose from "mongoose";
 
 class BudgetService {
     //Pobiera budżet usera
@@ -11,7 +13,7 @@ class BudgetService {
         }
 
         //user: req.user.id
-        const budgets = await Budget.find({user: userId});
+        const budgets = await Budget.find({ user: userId }).populate('categories');
 
         return {
             user: {
@@ -25,7 +27,7 @@ class BudgetService {
 
     //Tworzy nowy budżet
     static async createBudget(userId, data) {
-        const {name, categories, limit, period = 'monthly'} = data;
+        const {name, categories, limit, month, year, alertThreshold} = data;
 
         if (!name || !categories || !limit) {
             throw new Error('Brak któregoś z wymaganych pól: name, categories, limit');
@@ -54,7 +56,6 @@ class BudgetService {
         const existingBudget = await Budget.findOne({
             user: userId,
             name: name,
-            period: period,
             month: now.getMonth(),
             year: now.getFullYear()
         });
@@ -63,22 +64,77 @@ class BudgetService {
             throw new Error(`Budżet "${name}" już istnieje w tym okresie`);
         }
 
-        // Utwórz budżet
+        const categoryIds = await Promise.all(
+            categories.map(async (cat) => {
+                if (typeof cat === 'string' && mongoose.isValidObjectId(cat)) {
+                    return cat;
+                }
+
+                const category = await Category.findOneAndUpdate(
+                    { user: userId, name: cat.name },
+                    {
+                        $setOnInsert: {
+                            user: userId,
+                            name: cat.name,
+                            icon: cat.icon,
+                            limit: cat.budget,
+                            subcategories: (cat.subcategories || []).map(sub => ({
+                                name: sub.name,
+                                icon: sub.icon,
+                                limit: sub.budget
+                            }))
+                        }
+                    },
+                    { new: true, upsert: true }
+                );
+                return category._id;
+            })
+        );
+
+        // Krok 2: stwórz budżet z referencjami do stworzonych kategorii
         const budget = await Budget.create({
             user: userId,
-            name,
-            categories,
+            categories: categoryIds,
             limit,
-            period,
             month: now.getMonth(),
             year: now.getFullYear(),
             isActive: true
         });
 
-        return budget;
+        return budget.populate('categories');
     }
 
+    static async addSubcategory(userId, budgetId, categoryId, data) {
+        if (!data?.name) {
+            throw new Error('Nazwa subkategorii jest wymagana');
+        }
 
+        const budget = await Budget.findOne({ _id: budgetId, user: userId });
+        if (!budget) {
+            throw new Error('Budżet nie znaleziony');
+        }
+
+        const belongsToBudget = budget.categories.some(
+            (id) => id.toString() === categoryId
+        );
+        if (!belongsToBudget) {
+            throw new Error('Ta kategoria nie należy do wskazanego budżetu');
+        }
+
+        const category = await Category.findOne({ _id: categoryId, user: userId });
+        if (!category) {
+            throw new Error('Kategoria nie znaleziona');
+        }
+
+        category.subcategories.push({
+            name: data.name,
+            icon: data.icon,
+            limit: data.budget // front wysyła "budget", model ma "limit" — jak przy createBudget
+        });
+
+        await category.save();
+        return category;
+    }
 
 };
 
