@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.get("/", getBudgets);
 router.post("/", createBudget);
+router.post("/:budgetId/categories/:categoryId/subcategories", addSubcategory);
 router.put("/:id", updateBudget);
 router.delete("/:id", deleteBudget);
 

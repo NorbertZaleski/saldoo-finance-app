@@ -1,4 +1,4 @@
-// Formatowanie kwoty w PLN (lub innej walucie podanej jako symbol)
+// Formatowanie kwoty
 export const formatCurrency = (amount, currency = 'zł') => {
     return new Intl.NumberFormat('pl-PL', {
         style: 'currency',
@@ -8,7 +8,7 @@ export const formatCurrency = (amount, currency = 'zł') => {
     }).format(amount || 0).replace('zł', currency);
 };
 
-// Procent wykorzystania budżetu kategorii (0-100)
+// Procent wykorzystania budżetu kategorii
 export const calculateProgress = (spent, budget) => {
     if (!budget || budget === 0) return 0;
     return Math.min((spent / budget) * 100, 100);
