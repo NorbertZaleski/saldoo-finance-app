@@ -1,4 +1,4 @@
-import { BanknoteArrowDown, BanknoteArrowUp, Briefcase, Car, CarTaxiFront, Coffee, Film, HandCoins, Heart, Home, ShoppingBag, Smartphone, Utensils, Wallet } from "lucide-react";
+import { BanknoteArrowDown, BanknoteArrowUp, Briefcase, Car, CarTaxiFront, Coffee, Film, HandCoins, Heart, Home, Plus, ShoppingBag, Smartphone, Utensils, Wallet } from "lucide-react";
 
 const ICON_MAP =  {
     default: Wallet,
@@ -15,6 +15,7 @@ const ICON_MAP =  {
     withdraw: BanknoteArrowDown,
     transfer: HandCoins,
     home: Home,
+    plus: Plus,
 };
 
 export default ICON_MAP;

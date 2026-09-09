@@ -1,4 +1,4 @@
-import ICON_MAP from "../../constants/iconMap";
+import ICON_MAP from "../../../constants/iconMap";
 
 const Icon = ({name, size=24, className=""}) => {
     const IconComponent = ICON_MAP[name?.toLowerCase()] || ICON_MAP.default;

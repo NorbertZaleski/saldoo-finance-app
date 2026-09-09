@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        'main-text': 'rgba(255, 255, 255, 0.6)',
         'bg': 'rgba(62, 19, 82, 0.3)',
         'bg-overlay': 'rgba(62, 19, 82, 0.6)',
         'bg-widget': 'rgba(rgba(62, 19, 82, 0.5)',

@@ -3,8 +3,8 @@ export const formatCurrency = (amount, currency = 'zł') => {
     return new Intl.NumberFormat('pl-PL', {
         style: 'currency',
         currency: 'PLN',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
     }).format(amount || 0).replace('zł', currency);
 };
 
@@ -46,7 +46,6 @@ export const formatBudgetEntry = (budget, user) => {
 };
 
 // Wyciąga listę budżetów z różnych możliwych kształtów odpowiedzi API
-// (backend bywa niespójny — trzymamy tę logikę w jednym miejscu)
 export const extractBudgetsList = (response) => {
     if (Array.isArray(response?.data)) return response.data;
     if (response?.data?.budgets) return response.data.budgets;
