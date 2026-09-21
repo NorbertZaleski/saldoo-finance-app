@@ -1,7 +1,7 @@
 import { Plus, Trash } from 'lucide-react';
 import { useAccounts} from '../../../hooks/useAccounts';
-import { formatCurrency } from '../../../utils/budgetFormat';
-import { getAccountIcon } from '../../../utils/accountIcons';
+import { formatCurrency } from '../../../utils/budgetFormat.utils.js';
+import { getAccountIcon } from '../../../constants/accountIcons';
 import Widget from './Widget';
 import { useState } from 'react';
 import AddAccountForm from './addAccountForm';

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { budgetService } from '../services/budget.service';
-import { formatBudgetEntry, extractBudgetsList } from '../utils/budgetFormat';
+import { formatBudgetEntry, extractBudgetsList } from '../utils/budgetFormat.utils.js';
 
 export function useBudgets() {
     const [allBudgets, setAllBudgets] = useState([]);

@@ -3,7 +3,7 @@ import BudgetCategoryList from '../components/budget/BudgetCategoryList';
 import AddCategoryForm from '../components/budget/AddCategoryForm';
 import MonthYearPicker from '../components/budget/MonthYearPicker';
 import { useBudgetForMonth } from '../hooks/useBudgetForMonth';
-import { formatCurrency } from '../utils/budgetFormat';
+import { formatCurrency } from '../utils/budgetFormat.utils.js';
 import { budgetService } from '../services/budget.service';
 
 const BudgetPage = () => {

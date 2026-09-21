@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Edit2, Trash2 } from 'lucide-react';
-import { formatCurrency, calculateProgress, getProgressColor } from '../../utils/budgetFormat';
+import { formatCurrency, calculateProgress, getProgressColor } from '../../utils/budgetFormat.utils.js';
 
 /**
  * Ten sam komponent jest używany:

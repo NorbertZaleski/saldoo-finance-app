@@ -1,7 +1,7 @@
 import Widget from './Widget';
 import BudgetCategoryList from '../../budget/BudgetCategoryList';
 import { useBudgetForMonth } from '../../../hooks/useBudgetForMonth';
-import { formatCurrency } from '../../../utils/budgetFormat';
+import { formatCurrency } from '../../../utils/budgetFormat.utils.js';
 
 /**
  * Widżet budżetu na dashboard.

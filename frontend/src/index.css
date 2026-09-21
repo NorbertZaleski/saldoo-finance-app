@@ -14,3 +14,7 @@ img {
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
 }
+
+.lucide * {
+  vector-effect: non-scaling-stroke;
+}

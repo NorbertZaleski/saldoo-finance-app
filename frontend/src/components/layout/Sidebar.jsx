@@ -67,15 +67,15 @@ const Sidebar = () => {
               to={item.path}
               className={({ isActive }) => `
                 flex items-center gap-3 px-3 py-2.5 rounded-xl
-                transition-all duration-200 text-white font-medium hover:text-white bg-highlight
-                hover:bg-white/10 border-[0.5px] border-solid border-white/20
+                transition-all duration-200 text-icons font-medium hover:text-white bg-highlight
+                hover:bg-white/5 border-[0.5px] border-solid border-white/30
                 ${isActive ? 'bg-primary-500/20 text-primary-400' : ''}
                 ${isCollapsed ? 'justify-left px-2' : ''}
               `}
             >
-              <Icon size={32}
+              <Icon size={34}
               className='flex-shrink-0'
-              strokeWidth={1.5}
+              strokeWidth={2}
               />
               {!isCollapsed && (
                 <span className="text-lg font-medium whitespace-nowrap">
