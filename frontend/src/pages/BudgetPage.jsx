@@ -56,7 +56,7 @@ const BudgetPage = () => {
     }
 
     return (
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 bg-bg rounded-xl">
             <div className="flex flex-wrap justify-between items-center gap-4">
                 <h1 className="text-2xl font-bold text-white">
                     {budgetData?.name || 'Budżet'}

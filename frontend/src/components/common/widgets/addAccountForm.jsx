@@ -25,7 +25,6 @@ const AddAccountForm = ({ onSubmit, onCancel }) => {
             source: 'manual'
         };
 
-        // Pass data to parent
         onSubmit(formValues);
 
         e.target.reset();

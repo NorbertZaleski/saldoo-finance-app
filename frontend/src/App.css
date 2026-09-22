@@ -15,35 +15,5 @@ body {
 }
 
 a {
-  color: #6c63ff;
   text-decoration: none;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #e8ecf1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6c63ff;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #5a52d5;
-}
-
-:focus {
-  outline: 2px solid #6c63ff;
-  outline-offset: 2px;
-}
-
-::selection {
-  background: #6c63ff;
-  color: #ffffff;
 }

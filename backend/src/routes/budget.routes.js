@@ -1,5 +1,5 @@
 import express from "express";
-import {createBudget, deleteBudget, getBudgets, updateBudget} from "../controllers/budget.controller.js"
+import {createBudget, deleteBudget, getBudgets, updateBudget, addSubcategory} from "../controllers/budget.controller.js"
 import { protect } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
