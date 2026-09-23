@@ -16,4 +16,4 @@ tailwindcss
 lucide-react
 clsx
 axios
-animejs
+react-grid-layout
