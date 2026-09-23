@@ -15,9 +15,9 @@ export function useBudgets() {
             setAllBudgets(extractBudgetsList(response));
             setUser(response.user || null);
             setError(null);
-        } catch (err) {
-            console.error('Błąd pobierania budżetu:', err);
-            setError(err.message || 'Nie udało się pobrać budżetu');
+        } catch (error) {
+            console.error('Błąd pobierania budżetu:', error);
+            setError(error.message || 'Nie udało się pobrać budżetu');
         } finally {
             setLoading(false);
         }

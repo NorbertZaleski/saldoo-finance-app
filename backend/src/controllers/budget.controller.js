@@ -38,14 +38,11 @@ export const createBudget = async(req,res) => {
     try {
         //tymczasowy user stały
         const userId = req.user?.id || '507f1f77bcf86cd799439012';
-        // Docelowo: const userId = req.user.id;
         
         const budgetData = req.body;
         
-        // Wywołaj serwis
         const newBudget = await BudgetService.createBudget(userId, budgetData);
 
-        // Wyślij odpowiedź
         res.status(201).json({
             success: true,
             message: "Budget created successfully",

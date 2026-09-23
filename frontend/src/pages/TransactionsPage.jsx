@@ -1,8 +1,5 @@
-import Icon from "../components/common/icons/Icon";
-import PlusIcon from "../components/common/icons/PlusIcon";
-import { Search, EllipsisVertical } from "lucide-react";
-import { formatCurrency } from "../utils/budgetFormat.utils";
 import TransactionList from "../components/transactions/TransactionList";
+import { useTransactions } from "../hooks/useTransactions";
 
 const TransactionsPage = ({
     transactions = [{
@@ -31,6 +28,16 @@ const TransactionsPage = ({
     isTransactionDeletable = false,
 }) => {
 
+    const {
+        allTransactions,
+        loading,
+        error,
+        user
+    } = useTransactions();
+
+    if (loading) return <div className="text-main-text/50 p-6">Ładowanie...</div>;
+    if (error) return <div className="text-red-400 p-6">{error}</div>;
+
     if (!transactions.length) {
         return (
             <div className="text-center text-main-text/60 py-8">
@@ -42,7 +49,8 @@ const TransactionsPage = ({
 return (
         <div className="p-6">
             <div>
-                <TransactionList transactions={transactions} currency={currency} />
+                <TransactionList transactions={allTransactions} currency={currency} />
+                
             </div>
         </div>
     );

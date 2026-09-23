@@ -12,3 +12,10 @@ export const groupTransactionsByDay = (transactions) => {
 
   return Object.entries(groups);
 };
+
+// Wyciąga listę transakcji z różnych możliwych kształtów odpowiedzi API
+export const extractTransactionsList = (response) => {
+    if (Array.isArray(response)) return response;
+    if (Array.isArray(response?.transactions)) return response.transactions;
+    return [];
+};

@@ -1,42 +1,42 @@
 import mongoose from "mongoose";
 
 const budgetSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-        index: true
-    },
-    categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
-        required: 'true'
-    }],
-    limit: {
-        type: Number,
-        required: [true, 'Limit jest wymagany'],
-        min: [0.01, 'Limit musi być większy od 0']
-    },
-    month: {
-        type: Number,
-        min: 0,
-        max: 11,
-        default: () => new Date().getMonth()
-    },
-    year: {
-        type: Number,
-        default: () => new Date().getFullYear()
-    },
-    isActive: {
-        type: Boolean,
-        default: true
-    },
-    alertTreshold: {
-        type: Number,
-        default: 80,
-        min: 0,
-        max: 100
-    },
+  user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      index: true
+  },
+  categories: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
+      required: 'true'
+  }],
+  limit: {
+      type: Number,
+      required: [true, 'Limit jest wymagany'],
+      min: [0.01, 'Limit musi być większy od 0']
+  },
+  month: {
+      type: Number,
+      min: 0,
+      max: 11,
+      default: () => new Date().getMonth()
+  },
+  year: {
+      type: Number,
+      default: () => new Date().getFullYear()
+  },
+  isActive: {
+      type: Boolean,
+      default: true
+  },
+  alertTreshold: {
+      type: Number,
+      default: 80,
+      min: 0,
+      max: 100
+  },
 }, {
     timestamps: true
 });
