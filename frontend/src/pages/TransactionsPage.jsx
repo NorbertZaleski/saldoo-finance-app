@@ -50,7 +50,6 @@ return (
         <div className="p-6">
             <div>
                 <TransactionList transactions={allTransactions} currency={currency} />
-                
             </div>
         </div>
     );

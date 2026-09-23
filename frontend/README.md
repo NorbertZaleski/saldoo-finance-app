@@ -16,3 +16,4 @@ tailwindcss
 lucide-react
 clsx
 axios
+animejs

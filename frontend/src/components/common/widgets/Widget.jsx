@@ -60,7 +60,9 @@ const WidgetHeader = ({ children, className = '', size = 'medium' }) => {
       sizeStyle.header,
       className
     )}>
-      {children}
+      <div className="cursor-move flex items-center justify-between p-3">
+        {children}
+      </div>
     </div>
   );
 };
