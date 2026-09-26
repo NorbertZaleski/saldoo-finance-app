@@ -6,6 +6,15 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const HEIGHT_MAP = {
+  small: 3,
+  medium: 4,
+  large: 5,
+};
+const DEFAULT_HEIGHT = 4;
+const COLS = 3;
+
 const WidgetGridLayout = ({ 
   children, 
   className = '',
@@ -16,6 +25,7 @@ const WidgetGridLayout = ({
       Children.toArray(children).filter(isValidElement).map((child, i) => ({
         id: child.key ?? String(i),
         node: child,
+        h: HEIGHT_MAP[child.props?.size] ?? DEFAULT_HEIGHT,
       })),
     [children]
   );
@@ -24,10 +34,10 @@ const WidgetGridLayout = ({
     () =>
       items.map((item, i) => ({
         i: item.id,
-        x: (i * 4) % 12,
-        y: Math.floor(i / 3),
-        w: 4,
-        h: 4,
+        x: i % COLS,
+        y: Math.floor(i / COLS),
+        w: 1,
+        h: item.h,
       })),
     [items]
   );
@@ -38,7 +48,7 @@ const WidgetGridLayout = ({
       try {
         return JSON.parse(saved);
       } catch {
-        // ignorujemy uszkodzony zapis
+        //
       }
     }
     return { lg: defaultLayout };
@@ -48,20 +58,23 @@ const WidgetGridLayout = ({
     setLayouts(allLayouts);
     localStorage.setItem(storageKey, JSON.stringify(allLayouts));
   };
+
 console.log('items ids:', items.map(i => i.id));
 console.log('current layout:', layouts.lg);
+
   return (
     <PageLayout>
       <ResponsiveGridLayout
         className={`widgetGrid ${className}`}
         layouts={layouts}
         onLayoutChange={handleLayoutChange}
-        breakpoints={{ lg: 1024, md: 768, sm: 480, xs: 0 }}
-        cols={{ lg: 12, md: 8, sm: 4, xs: 2 }}
+        breakpoints={{ lg: 1024, md: 768, sm: 480}}
+        cols={{ lg: COLS, md: COLS, sm: 1}}
         rowHeight={80}
         margin={[16, 16]}
         draggableHandle=".widgetDragHandle"
         compactType="vertical"
+        isResizable={false}
       >
         {items.map(({ id, node }) => (
           <div key={id} className="widgetDraggable">

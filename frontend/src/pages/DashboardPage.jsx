@@ -20,13 +20,23 @@ const DashboardPage = () => {
 
                 {/* przykład default widżeta, ale nie będzie używany w ten sposób */}
                 <Widget key="example" size="large" variant="glass">
-                    <Widget.Header className="widgetDragHandle">Tytuł</Widget.Header>
+                    <Widget.Header>Tytuł</Widget.Header>
                     <Widget.Body>
                         <div className="h-[200px] flex items-center justify-center text-white/40">
                             treść
                         </div>
                     </Widget.Body>
                 </Widget>
+
+                <Widget key="example-2" size="small" variant="glass">
+                    <Widget.Header>small</Widget.Header>
+                    <Widget.Body>
+                        <div className="h-[200px] flex items-center justify-center text-white/40">
+                            treść
+                        </div>
+                    </Widget.Body>
+                </Widget>
+
         </WidgetGridLayout>
     );
 };

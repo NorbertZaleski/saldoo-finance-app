@@ -46,11 +46,13 @@ const BudgetWidget = ({
 
     return (
         <Widget size={size} className={className} variant="glass">
-            <Widget.Body>
+            <Widget.Header>
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold text-white">Budżet</h3>
                 </div>
-
+            </Widget.Header>
+            <Widget.Body>
+  
                 <div className="bg-white/5 rounded-lg p-4 mb-4">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-sm text-white/60">Pozostało do wydania</span>

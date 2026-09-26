@@ -2,19 +2,19 @@ import { cn } from '../../../utils/cn.utils.js';
 
 const sizeClasses = {
   small: {
-    wrapper: 'w-[300px]',
+    wrapper: 'max-w-[300px] w-full h-full mx-auto',
     header: 'text-sm px-4 py-2',
     body: 'text-sm p-4',
     footer: 'text-xs px-4 py-2'
   },
   medium: {
-    wrapper: 'w-[500px]',
+    wrapper: 'max-w-[400px] w-full h-full mx-auto',
     header: 'text-base px-5 py-3',
     body: 'text-base p-5',
     footer: 'text-sm px-5 py-3'
   },
   large: {
-    wrapper: 'w-[700px]',
+    wrapper: 'max-w-[450px] w-full h-full mx-auto',
     header: 'text-lg px-6 py-4',
     body: 'text-lg p-6',
     footer: 'text-base px-6 py-4'
@@ -56,7 +56,7 @@ const WidgetHeader = ({ children, className = '', size = 'medium' }) => {
   const sizeStyle = sizeClasses[size] || sizeClasses.medium;
   return (
     <div className={cn(
-      'border-b border-white/10',
+      'border-b border-white/10 widgetDragHandle',
       sizeStyle.header,
       className
     )}>

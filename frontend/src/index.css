@@ -18,3 +18,9 @@ img {
 .lucide * {
   vector-effect: non-scaling-stroke;
 }
+
+.react-grid-placeholder {
+  background: transparent !important;
+  border: 1px dashed rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.5rem; /* dopasuj do zaokrągleń Twoich widżetów */
+}
