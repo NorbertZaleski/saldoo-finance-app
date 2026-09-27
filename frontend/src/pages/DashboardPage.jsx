@@ -9,7 +9,7 @@ const DashboardPage = () => {
     const { visibleCategoryIds } = useBudgetWidgetSettings();
 
     return (
-        <WidgetGridLayout>
+        <WidgetGridLayout storageKey="dashboard-layout">
                 <BudgetWidget
                     key="budget"
                     visibleCategoryIds={visibleCategoryIds}

@@ -1,4 +1,4 @@
-import { useState, useMemo, Children, isValidElement } from 'react';
+import { useState, useMemo, Children, isValidElement, useEffect, useRef } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout/legacy';
 import PageLayout from './PageLayout';
 
@@ -14,12 +14,21 @@ const HEIGHT_MAP = {
 };
 const DEFAULT_HEIGHT = 4;
 const COLS = 3;
+const ROW_HEIGHT = 80;
+const MARGIN_Y = 4;
+
+
+function pxToRows(heightPx) {
+  return Math.max(1, Math.ceil((heightPx + MARGIN_Y) / (ROW_HEIGHT + MARGIN_Y)));
+}
 
 const WidgetGridLayout = ({ 
   children, 
   className = '',
-  storageKey = 'dashboard-layout',
+  storageKey,
 }) => {
+  const itemRefs = useRef({});
+
   const items = useMemo(
     () =>
       Children.toArray(children).filter(isValidElement).map((child, i) => ({
@@ -59,8 +68,30 @@ const WidgetGridLayout = ({
     localStorage.setItem(storageKey, JSON.stringify(allLayouts));
   };
 
-console.log('items ids:', items.map(i => i.id));
-console.log('current layout:', layouts.lg);
+ useEffect(() => {
+    const observers = items.map((item) => {
+      const node = itemRefs.current[item.id];
+      if (!node) return null;
+
+      const observer = new ResizeObserver(([entry]) => {
+        const neededRows = pxToRows(entry.target.scrollHeight);
+        setLayouts((prev) => {
+          const lg = prev.lg ?? [];
+          const existing = lg.find((l) => l.i === item.id);
+          if (!existing || existing.h === neededRows) return prev;
+          const updatedLg = lg.map((l) => (l.i === item.id ? { ...l, h: neededRows } : l));
+          const updated = { ...prev, lg: updatedLg };
+          localStorage.setItem(storageKey, JSON.stringify(updated));
+          return updated;
+        });
+      });
+
+      observer.observe(node);
+      return observer;
+    });
+
+    return () => observers.forEach((o) => o?.disconnect());
+  }, [items, storageKey]);
 
   return (
     <PageLayout>
@@ -70,15 +101,17 @@ console.log('current layout:', layouts.lg);
         onLayoutChange={handleLayoutChange}
         breakpoints={{ lg: 1024, md: 768, sm: 480}}
         cols={{ lg: COLS, md: COLS, sm: 1}}
-        rowHeight={80}
-        margin={[16, 16]}
+        rowHeight={ROW_HEIGHT}
+        margin={[16, MARGIN_Y]}
         draggableHandle=".widgetDragHandle"
         compactType="vertical"
         isResizable={false}
       >
         {items.map(({ id, node }) => (
           <div key={id} className="widgetDraggable">
-            {node}
+            <div ref={(el) => (itemRefs.current[id] = el)} className="w-full h-fit">
+              {node}
+            </div>
           </div>
         ))}
       </ResponsiveGridLayout>
