@@ -14,16 +14,35 @@ const DashboardPage = () => {
                     key="budget"
                     visibleCategoryIds={visibleCategoryIds}
                     size="medium"
+                    variant="glass"
                 />
 
-                <BalanceWidget key="balance"/>
+                <BalanceWidget key="balance" size='small'/>
 
                 {/* przykład default widżeta, ale nie będzie używany w ten sposób */}
                 <Widget key="example" size="large" variant="glass">
                     <Widget.Header>Tytuł</Widget.Header>
                     <Widget.Body>
                         <div className="h-[200px] flex items-center justify-center text-white/40">
-                            treść
+                            treść 1
+                        </div>
+                    </Widget.Body>
+                </Widget>
+
+                <Widget key="example-4" size="large" variant="glass">
+                    <Widget.Header>Tytuł</Widget.Header>
+                    <Widget.Body>
+                        <div className="h-[200px] flex items-center justify-center text-white/40">
+                            treść 4
+                        </div>
+                    </Widget.Body>
+                </Widget>
+
+                <Widget key="example-3" size="medium" variant="glass">
+                    <Widget.Header>Tytuł</Widget.Header>
+                    <Widget.Body>
+                        <div className="h-[200px] flex items-center justify-center text-white/40">
+                            treść 3
                         </div>
                     </Widget.Body>
                 </Widget>
@@ -32,7 +51,7 @@ const DashboardPage = () => {
                     <Widget.Header>small</Widget.Header>
                     <Widget.Body>
                         <div className="h-[200px] flex items-center justify-center text-white/40">
-                            treść
+                            treść 2
                         </div>
                     </Widget.Body>
                 </Widget>

@@ -2,19 +2,19 @@ import { cn } from '../../../utils/cn.utils.js';
 
 const sizeClasses = {
   small: {
-    wrapper: 'max-w-[300px] w-full h-fit mx-auto',
+    wrapper: 'w-[300px] h-fit mx-auto',
     header: 'text-sm px-4 py-2',
     body: 'text-sm p-4',
     footer: 'text-xs px-4 py-2'
   },
   medium: {
-    wrapper: 'max-w-[400px] w-full h-fit mx-auto',
+    wrapper: 'w-[400px] h-fit mx-auto',
     header: 'text-base px-5 py-3',
     body: 'text-base p-5',
     footer: 'text-sm px-5 py-3'
   },
   large: {
-    wrapper: 'max-w-[450px] w-full h-fit mx-auto',
+    wrapper: 'w-[450px] h-fit mx-auto',
     header: 'text-lg px-6 py-4',
     body: 'text-lg p-6',
     footer: 'text-base px-6 py-4'
