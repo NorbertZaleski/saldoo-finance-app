@@ -4,11 +4,12 @@ import budgetRoutes from "./budget.routes.js";
 import educationRoutes from "./education.routes.js";
 import userRoutes from "./user.routes.js";
 import authRoutes from "./auth.routes.js";
+import { protect } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
 router.use('/auth', authRoutes);
-router.use("/accounts", accountRoutes);
+router.use("/accounts", protect, accountRoutes);
 router.use("/budget", budgetRoutes);
 router.use("/education", educationRoutes);
 router.use("/user", userRoutes);

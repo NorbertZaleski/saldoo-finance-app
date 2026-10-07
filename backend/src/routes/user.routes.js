@@ -1,5 +1,6 @@
 import express from "express";
-import { getUser } from "../controllers/user.controller.js";
+import { createuser, getUser } from "../controllers/user.controller.js";
+import { protect } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ const router = express.Router();
 //router.use(protect);
 
 router.get("/:id", getUser);
-router.post("/", );
+router.post("/", createuser);
 router.put("/:id", );
 router.delete("/:id", );
 
