@@ -1,4 +1,4 @@
-import Category from '../models/Category.js';
+import Category from '../models/Category.model.js';
 
 // UWAGA: zakładam, że middleware autoryzacji ustawia `req.user.id` / `req.user._id`
 // (tak jak sugeruje interceptor z Bearer tokenem we frontendowym budgetService.js).
